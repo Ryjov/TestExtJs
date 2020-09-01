@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TestExtJs.Models;
 
 namespace TestExtJs
 {
@@ -24,6 +25,8 @@ namespace TestExtJs
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            string connectionString = "Server=127.0.0.1;User Id=postgres;Password=225322;Port=5432;Database=SocSecDB";
+            services.AddTransient<IUserRepository, UserRepository>(provider => new UserRepository(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

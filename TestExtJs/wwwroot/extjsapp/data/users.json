@@ -1,15 +1,18 @@
-{
-  "success": true,
-  "users": [
-    {
-      "id": 1,
-      "name": "Ed",
-      "email": "ed@sencha.com"
-    },
-    {
-      "id": 2,
-      "name": "Tommy",
-      "email": "tommy@sencha.com"
-    }
-  ]
-}
+[
+  {
+    "id": 3,
+    "name": "Josef Vissareonovitch Stalin",
+    "email": "josef@mail.ru",
+    "passport": "9523 236544",
+    "snils": "959-652-321 00",
+    "inn": "159642369875"
+  },
+  {
+    "id": 4,
+    "name": "Владимир Ильич Ленин",
+    "email": "ulyanov@mail.ru",
+    "passport": "2563 456888",
+    "snils": "432-652-111 01",
+    "inn": "165896322478"
+  }
+]

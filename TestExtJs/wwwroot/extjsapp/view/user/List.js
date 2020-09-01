@@ -7,8 +7,11 @@
 
     initComponent: function () {
         this.columns = [
-            { header: 'Name', dataIndex: 'name', flex: 1 },
-            { header: 'Email', dataIndex: 'email', flex: 1 }
+            { header: 'ФИО', dataIndex: 'name', flex: 1 },
+            { header: 'Электронная почта', dataIndex: 'email', flex: 1 },
+            { header: 'СНИЛС', dataIndex: 'snils', flex: 1 },
+            { header: 'Серия и номер паспорта', dataIndex: 'passport', flex: 1 },
+            { header: 'ИНН', dataIndex: 'inn', flex: 1 }
         ];
 
         this.callParent(arguments);

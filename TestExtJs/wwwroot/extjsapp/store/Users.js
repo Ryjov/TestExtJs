@@ -5,13 +5,14 @@
 
     proxy: {
         type: 'ajax',
-        api: {
-            read: 'extjsapp/data/users.json',
-            update: 'data/updateUsers.json'
-        },
+        url: 'extjsapp/data/users.json',
+        //api: {
+        //    read: 'http://localhost:44327/Home/UsersList',
+        //    //update: 'data/updateUsers.json'
+        //},
         reader: {
             type: 'json',
-            root: 'users',
+            root: 'personas',
             successProperty: 'success'
         }
     }
