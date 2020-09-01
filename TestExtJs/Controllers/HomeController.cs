@@ -9,6 +9,7 @@ using TestExtJs.Models;
 
 namespace TestExtJs.Controllers
 {
+    
     public class HomeController : Controller
     {
         IUserRepository repo;
@@ -16,13 +17,15 @@ namespace TestExtJs.Controllers
         {
             return View();
         }
+        
         public HomeController(IUserRepository r)
         {
             repo = r;
         }
-        public List<UserModel> UsersList()
+        [HttpGet]
+        public JsonResult UsersList()
         {
-            return repo.GetUsers();
+            return Json(repo.GetUsers());
         }
     }
 }

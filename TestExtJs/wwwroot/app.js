@@ -10,10 +10,21 @@
 
     launch: function () {
         Ext.create('Ext.container.Viewport', {
-            layout: 'fit',
-            items: {
-                xtype: 'userlist'
-            }
-        });
+            layout: 'column',
+            width: '100%',
+            height: '100%',
+            id: 'main',
+            items: [
+            {
+                    xtype: 'userlist',
+                    columnWidth: 0.5
+            },
+            {
+                xtype: 'panel',
+                title: 'Child Panel 2',
+                height: 100,
+                columnWidth: 0.5
+            }]
+        })
     }
 });

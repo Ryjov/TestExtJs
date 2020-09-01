@@ -5,6 +5,7 @@ using Npgsql;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TestExtJs.Models
 {
