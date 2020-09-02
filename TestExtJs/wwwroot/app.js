@@ -15,16 +15,19 @@
             height: '100%',
             id: 'main',
             items: [
-            {
+                {
                     xtype: 'userlist',
                     columnWidth: 0.5
-            },
-            {
-                xtype: 'panel',
-                title: 'Child Panel 2',
-                height: 100,
-                columnWidth: 0.5
-            }]
+                }, {
+                    xtype: 'button',
+                    columnWidth: 0.5,
+                    text: 'Добавить лицо',
+                    margin: '50 0 0 50',
+                    handler: function () {
+                        var view = Ext.widget('useredit');
+                    }
+                }
+            ]
         })
     }
 });

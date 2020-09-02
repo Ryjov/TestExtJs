@@ -2,7 +2,7 @@
     extend: 'Ext.window.Window',
     alias: 'widget.useredit',
 
-    title: 'Edit User',
+    title: 'Личность',
     layout: 'fit',
     autoShow: true,
 
@@ -12,14 +12,33 @@
                 xtype: 'form',
                 items: [
                     {
+                        xtype: 'hiddenfield',
+                        name: 'id'
+                    },
+                    {
                         xtype: 'textfield',
                         name: 'name',
-                        fieldLabel: 'Name'
+                        fieldLabel: 'ФИО'
                     },
                     {
                         xtype: 'textfield',
                         name: 'email',
-                        fieldLabel: 'Email'
+                        fieldLabel: 'Электронная почта'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'passport',
+                        fieldLabel: 'Серия и номер паспорта'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'snils',
+                        fieldLabel: 'СНИЛС'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'inn',
+                        fieldLabel: 'ИНН'
                     }
                 ]
             }

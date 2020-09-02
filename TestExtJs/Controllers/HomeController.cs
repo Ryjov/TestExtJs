@@ -27,5 +27,15 @@ namespace TestExtJs.Controllers
         {
             return Json(repo.GetUsers());
         }
+        [HttpPost]
+        public JsonResult UsersAdd(UserModel user)
+        {
+            return Json(repo.Create(user));
+        }
+        [HttpPut]
+        public void UsersEdit(UserModel user)
+        {
+            repo.Update(user);
+        }
     }
 }

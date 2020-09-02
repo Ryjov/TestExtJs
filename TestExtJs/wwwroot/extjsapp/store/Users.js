@@ -2,19 +2,20 @@
     extend: 'Ext.data.Store',
     model: 'AM.model.User',
     autoLoad: true,
+    autoSync: true,
 
     proxy: {
         type: 'ajax',
         url: 'Home/UsersList',
-        method: 'Get',
-        //api: {
-        //    read: 'Home/UsersList',
-        //    update: 'extjsapp/data/users.json'
-        //},
         reader: {
             type: 'json',
             root: 'personas',
             successProperty: 'success'
+        },
+        writer: {
+            type: 'json',
+            writeAllFields: true,//записываем всю строку целиком
+            root: 'personas'
         }
     }
 });
