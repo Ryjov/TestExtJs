@@ -5,69 +5,116 @@
         'user.List',
         'user.Edit'
     ],
-    
     stores: ['Users'],
-
-    models: [
-        'User'
-    ],
+    models: ['User'],
 
     init: function () {
         this.control({
             'viewport > userlist': {
                 itemdblclick: this.editUser
             },
-            //'useredit button[action=save]': {
-            //    click: this.updateUser
-            //},
+            'actioncolumn': {
+                itemClick: this.deleteUserOnActionColumn
+            },
             'useredit button[action=save]': {
-                click: this.createUser
+                click: this.updateUser
             }
         });
     },
 
     editUser: function (grid, record) {
-        var view = Ext.widget('useredit');
-
-        var rec = view.down('form').loadRecord(record);
+        Ext.Ajax.request({
+            method: 'GET',
+            url: 'Home/UsersOne',
+            params: {
+                id: record.get('id'),
+            },
+            success: function (response, options) {
+                var view = Ext.widget('useredit');
+                var obj = new AM.model.User(Ext.decode(response.responseText));
+                view.down('form').loadRecord(obj);
+                },
+            failure: function (response, options) {
+                console.log('server-side failure with status code ' + response.status);
+            }
+        })
     },
 
-    //updateUser: function (button) {
-    //    var win = button.up('window'),
-    //        form = win.down('form'),
-    //        record = form.getRecord(),
-    //        values = form.getValues(),
-    //        store = Ext.widget('userlist').getStore();
-    //    record.set(values);
-    //    store.load()
-    //    win.close();
-    //    store.sync();
-    //},
-
-    createUser: function (button) {
+    updateUser: function (button) {
         var win = button.up('window'),
             form = win.down('form'),
-            values = form.getValues();
-        Ext.Ajax.request({
-            url: 'Home/UsersAdd',
-            params: values,
-            //function (response, options) {
-            //var data = Ext.decode(response.responseText);
-        });
-        win.close();
-        Ext.Msg.alert('Пользователь добавлен', 'Пользователь ' + values.name + ' был создан');
-        var store = Ext.widget('userlist').getStore();
-        store.load();    
+            values = form.getValues(),
+            store = Ext.widget('userlist').getStore();
+        if (values.id == 0) {
+            Ext.Ajax.request({
+                method: 'POST',
+                url: 'Home/UsersAdd',
+                params: values,
+                success: function (response, options) {
+                    var data = Ext.decode(response.responseText);
+                    if (data) {
+                        win.close();
+                        Ext.Msg.alert('Пользователь добавлен', 'Пользователь ' + values.name + ' был создан');
+                        store.sync();
+                        store.load();
+                    }
+                    else {
+                        Ext.Msg.alert('Неуспех', 'Пользователь ' + values.name + ' был создан, но данные не были схвачены.');
+                    }
+                },
+                failure: function (response, options) {
+                    Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
+                }
+            });
+        }
+        else {
+            record = form.getRecord(),
+            oldname = record.get('name'),
+            Ext.Ajax.request({
+                method: 'PUT',
+                url: 'Home/UsersEdit',
+                params: values,
+                success: function (response, options) {
+                    var data = Ext.decode(response.responseText);
+                    if (data) {
+                        win.close();
+                        Ext.Msg.alert('Пользователь изменен', 'Данные пользователя ' + values.name + ' (' + oldname + ') были изменены ');
+                        store.sync();
+                        store.load();
+                    }
+                    else {
+                        Ext.Msg.alert('Неуспех', 'Пользователь ' + values.name + ' был создан, но данные не были схвачены.');
+                    }
+                },
+                failure: function (response, options) {
+                    Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
+                }
+            });
+            //record.set(values);
+        }
     },
-        //    newuser = Ext.create('AM.model.User');
-        //var store = Ext.widget('userlist').getStore();
-        //newuser.set('name', values.name);
-        //newuser.set('email', values.email);
-        //newuser.set('passport', values.passport);
-        //newuser.set('snils', values.snils);
-        //newuser.set('inn', values.inn);
-        //store.add(newuser);
-        //win.close();
-        //store.sync();
-        //alert('Создан новый пользователь: ' + values.name);
+
+    deleteUserOnActionColumn: function (view, rowIndex, colIndex, item, e, record, row) {
+        store = Ext.widget('userlist').getStore();
+        Ext.Msg.confirm('Подтвердите удаление', 'Вы уверены, что хотите удалить пользователя ' + record.get('name') + '?', function (button) {
+            if (button === "no") {}
+            else if(button === "yes") {               
+                Ext.Ajax.request({
+                    method: 'DELETE',
+                    url: 'Home/UsersDelete',
+                    params: {
+                        id: record.get('id'),
+                    },
+                    success: function (response, options) {
+                        store.sync();
+                        store.load();
+                        Ext.Msg.alert('Пользователь удален', 'Пользователь ' + record.get('name') + ' был удален');
+                    },
+                    failure: function (response, options) {
+                        Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
+                    }
+                });
+            }
+        }, this);
+    },
 });

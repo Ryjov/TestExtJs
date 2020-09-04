@@ -10,24 +10,45 @@
 
     launch: function () {
         Ext.create('Ext.container.Viewport', {
-            layout: 'column',
+            layout: 'border',
             width: '100%',
             height: '100%',
             id: 'main',
             items: [
                 {
                     xtype: 'userlist',
-                    columnWidth: 0.5
-                }, {
-                    xtype: 'button',
-                    columnWidth: 0.5,
-                    text: 'Добавить лицо',
-                    margin: '50 0 0 50',
-                    handler: function () {
-                        var view = Ext.widget('useredit');
-                    }
-                }
-            ]
-        })
+                    region: 'center',
+                    frame: true,
+                    dockedItems: [
+                        {
+                            xtype: 'toolbar',
+                            region: 'north',
+                            layout: {
+                                type: 'hbox',
+                                align: 'begin'
+                            },
+                            dock: 'top',
+                            items: [{
+                                xtype: 'button',
+                                id: 'adduserbutton',
+                                text: 'Добавить',
+                                icon: '../extjs/examples/restful/images/add.png',
+                                margin: '50 5 5 50',
+                                handler: function () {
+                                    var view = Ext.widget('useredit');
+                                }
+                            }, {
+                                xtype: 'button',
+                                id: 'deleteuserbutton',
+                                disabled: true,
+                                icon: '../extjs/examples/restful/images/delete.png',
+                                text: 'Удалить',
+                                margin: '50 5 5 50'
+                            }]
+                        }
+                    ]
+                }]
+            })
+        }
     }
-});
+);

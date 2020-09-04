@@ -8,7 +8,9 @@ namespace TestExtJs.Models
     public interface IUserRepository
     {
         List<UserModel> GetUsers();
-        void Update(UserModel user);
-        List<UserModel> Create(UserModel user);
+        String GetUser(int id);
+        String Update(UserModel user);
+        String Create(UserModel user);
+        List<UserModel> Delete(UserModel user);
     }
 }

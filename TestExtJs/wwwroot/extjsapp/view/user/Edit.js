@@ -46,11 +46,11 @@
 
         this.buttons = [
             {
-                text: 'Save',
+                text: 'Сохранить',
                 action: 'save'
             },
             {
-                text: 'Cancel',
+                text: 'Отмена',
                 scope: this,
                 handler: this.close
             }

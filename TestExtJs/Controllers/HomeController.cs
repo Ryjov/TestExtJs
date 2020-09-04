@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TestExtJs.Models;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace TestExtJs.Controllers
 {
@@ -27,15 +30,27 @@ namespace TestExtJs.Controllers
         {
             return Json(repo.GetUsers());
         }
-        [HttpPost]
-        public JsonResult UsersAdd(UserModel user)
+        [HttpGet]
+        public String UsersOne(int id)
         {
-            return Json(repo.Create(user));
+            return repo.GetUser(id);
         }
-        [HttpPut]
-        public void UsersEdit(UserModel user)
+
+        [HttpPost]
+        public String UsersAdd(UserModel user)
         {
-            repo.Update(user);
+            return repo.Create(user);
+        }
+
+        [HttpPut]
+        public String UsersEdit(UserModel user)
+        {
+            return repo.Update(user);
+        }
+        [HttpDelete]
+        public JsonResult UsersDelete(UserModel user)
+        {
+            return Json(repo.Delete(user));
         }
     }
 }

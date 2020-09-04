@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Helpers;
+using Newtonsoft.Json;
 
 namespace TestExtJs.Models
 {
@@ -23,24 +25,61 @@ namespace TestExtJs.Models
                 return db.Query<UserModel>("SELECT * FROM personas").ToList();
             }
         }
-        public void Update(UserModel user)
+        public String GetUser(int id)
         {
             using (IDbConnection db = new NpgsqlConnection(connectionString))
             {
-                var sqlQuery = "UPDATE personas SET name = @name, email = @emaile, passport=@passport, snils=@snils, inn=@inn WHERE id = @id";
-                db.Execute(sqlQuery, user);
+
+                return JsonConvert.SerializeObject(db.Query<UserModel>
+                    ("SELECT " +
+                    "*" +
+                    " FROM " +
+                    "personas" +
+                    " WHERE " +
+                    "id=" +
+                    id).FirstOrDefault());
             }
         }
-        public List<UserModel> Create(UserModel user)
+        public String Update(UserModel user)
         {
             using (IDbConnection db = new NpgsqlConnection(connectionString))
             {
-                return db.Query<UserModel>("INSERT INTO personas (name, email, passport, snils, inn) VALUES (@name, @email, @passport, @snils, @inn)", user).ToList();
-
-                // если мы хотим получить id добавленного пользователя
-                //var sqlQuery = "INSERT INTO Users (Name, Age) VALUES(@Name, @Age); SELECT CAST(SCOPE_IDENTITY() as int)";
-                //int? userId = db.Query<int>(sqlQuery, user).FirstOrDefault();
-                //user.Id = userId.Value;
+                return JsonConvert.SerializeObject(db.Query<UserModel>
+                    ("UPDATE " +
+                    "personas" +
+                    " SET " +
+                    "name = @name, " +
+                    "email = @email, " +
+                    "passport=@passport, " +
+                    "snils=@snils, " +
+                    "inn=@inn" +
+                    " WHERE " +
+                    "id = @id" +
+                    " RETURNING " +
+                    "*", 
+                    user).FirstOrDefault());
+            }
+        }
+        public String Create(UserModel user)
+        {
+            using (IDbConnection db = new NpgsqlConnection(connectionString))
+            {
+                return JsonConvert.SerializeObject(db.Query<UserModel>
+                    ("INSERT INTO" +
+                    " personas " +
+                    "(name, email, passport, snils, inn)" +
+                    " VALUES " +
+                    "(@name, @email, @passport, @snils, @inn) " +
+                    "RETURNING " +
+                    "*",
+                    user).FirstOrDefault());
+            }
+        }
+        public List<UserModel> Delete(UserModel user)
+        {
+            using (IDbConnection db = new NpgsqlConnection(connectionString))
+            {
+                return db.Query<UserModel>("DELETE FROM personas WHERE id = @id", user).ToList();
             }
         }
     }
