@@ -7,6 +7,34 @@
     selType: 'checkboxmodel',
     columnLines: true,
 
+    dockedItems: [
+        {
+            xtype: 'toolbar',
+            layout: {
+                type: 'hbox',
+                align: 'begin'
+            },
+            dock: 'top',
+            items: [{
+                xtype: 'button',
+                text: 'Добавить',
+                icon: '../extjs/examples/restful/images/add.png',
+                margin: '50 5 5 50',
+                handler: function () {
+                    var view = Ext.widget('useredit');
+                }
+            }, {
+                xtype: 'button',
+                //disabled: true,
+                icon: '../extjs/examples/restful/images/delete.png',
+                text: 'Удалить',
+                margin: '50 5 5 50',
+                handler: function (view) {
+                    this.fireEvent('deleteClick', view, 'edit');
+                }
+            }]
+        }
+    ],
 
     initComponent: function () {
         this.columns = [
@@ -22,7 +50,7 @@
                     icon: '../extjs/examples/restful/images/delete.png',
                     tooltip: 'Удалить личность',
                     handler: function (view, rowIndex, colIndex, item, e, record, row) {
-                        this.fireEvent('itemClick', view, rowIndex, colIndex, item, e, record, row, 'edit');
+                        this.fireEvent('deleteRowClick', view, rowIndex, colIndex, item, e, record, row, 'edit');
                     }
                 }]
             }

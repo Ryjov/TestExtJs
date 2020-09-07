@@ -14,11 +14,14 @@
                 itemdblclick: this.editUser
             },
             'actioncolumn': {
-                itemClick: this.deleteUserOnActionColumn
+                deleteRowClick: this.deleteUserOnActionColumn
             },
             'useredit button[action=save]': {
                 click: this.updateUser
-            }
+            },
+            'toolbar': {
+                deleteClick: this.deleteUserSelection
+            },
         });
     },
 
@@ -90,7 +93,6 @@
                     Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
                 }
             });
-            //record.set(values);
         }
     },
 
@@ -117,4 +119,17 @@
             }
         }, this);
     },
+
+    deleteUserSelection: function (view) {
+        Ext.Msg.alert('Delete','delete')
+        //var store = Ext.widget('userlist').getStore();
+        //var selection = this.getView().getSelectionModel().getSelection();
+        //if (selection.length > 1) {
+        //    store.removeAll(selection);
+        //}
+        //else {
+        //    store.remove(selection);
+        //}
+        //store.sync();
+    }
 });
