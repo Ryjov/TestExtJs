@@ -53,20 +53,22 @@
                     {
                         xtype: 'form',
                         fieldLabel: 'Документ, удостоверяющий личность',
+                        itemid: 'comboform',
                         items:
                         [
                                 {
                                     xtype: 'combobox',
                                     fieldLabel: 'Паспорт',
+                                    name: 'passport_type',
                                     store: 'Passports',
-                                    valueField: 'id',
-                                    displayField: 'type',
+                                    valueField: 'pass_id',
+                                    displayField: 'pass_name',
                                     queryMode: 'remote'
                                 },
                                 {
                                     xtype: 'textfield',
-                                    name: 'passport',
-                                    fieldLabel: 'Номер'
+                                    name: '',
+                                    fieldLabel: 'Серия и номер'
                                 }
                         ]
                     },

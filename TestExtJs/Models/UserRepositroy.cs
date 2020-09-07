@@ -22,7 +22,10 @@ namespace TestExtJs.Models
         {
             using (IDbConnection db = new NpgsqlConnection(connectionString))
             {
-                return db.Query<UserModel>("SELECT * FROM personas").ToList();
+                return db.Query<UserModel>("SELECT " +
+                    "*" +
+                    " FROM " +
+                    "personas").ToList();
             }
         }
         public String GetUser(int id)
@@ -51,6 +54,7 @@ namespace TestExtJs.Models
                     "name = @name, " +
                     "email = @email, " +
                     "passport=@passport, " +
+                    "passport_type=@passport_type, " +
                     "snils=@snils, " +
                     "inn=@inn" +
                     " WHERE " +
@@ -67,9 +71,9 @@ namespace TestExtJs.Models
                 return JsonConvert.SerializeObject(db.Query<UserModel>
                     ("INSERT INTO" +
                     " personas " +
-                    "(name, email, passport, snils, inn)" +
+                    "(name, email, passport_type, passport, snils, inn)" +
                     " VALUES " +
-                    "(@name, @email, @passport, @snils, @inn) " +
+                    "(@name, @email, @passport_type, @passport, @snils, @inn) " +
                     "RETURNING " +
                     "*",
                     user).FirstOrDefault());
