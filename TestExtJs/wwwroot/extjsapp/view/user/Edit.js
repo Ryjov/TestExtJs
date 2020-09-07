@@ -7,6 +7,27 @@
     autoShow: true,
 
     initComponent: function () {
+        Ext.apply(Ext.form.field.VTypes, {
+            snils: function (val, field) {
+                return /^([0-9][0-9][0-9])-([0-9][0-9][0-9])-([0-9][0-9][0-9]) ([0-9][0-9])$/i.test(val);
+            },
+            snilsInvalidText: 'СНИЛС введен неверно',
+            snilsMask: /[\d- ]/i
+        });
+        Ext.apply(Ext.form.field.VTypes, {
+            inn: function (val, field) {
+                return /^([0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9])$/i.test(val);
+            },
+            innInvalidText: 'ИНН введен неверно',
+            innlsMask: /[\d]/i
+        });
+        Ext.apply(Ext.form.field.VTypes, {
+            fio: function (val, field) {
+                return /^([А-ЯЁ][а-яё]*) ([А-ЯЁ][а-яё]*) ([А-ЯЁ][а-яё]*)$/i.test(val);
+            },
+            fioInvalidText: 'ФИО введен неверно',
+            fioMask: /[А-ЯЁа-яё ]/i
+        });
         this.items = [
             {
                 xtype: 'form',
@@ -18,29 +39,52 @@
                     {
                         xtype: 'textfield',
                         name: 'name',
-                        fieldLabel: 'ФИО'
+                        fieldLabel: 'ФИО',
+                        emptyText: 'Иванов Иван Иванович',
+                        vtype: 'fio'
                     },
                     {
                         xtype: 'textfield',
                         name: 'email',
-                        fieldLabel: 'Электронная почта'
+                        fieldLabel: 'Электронная почта',
+                        emptyText: 'aaa@gmail.com',
+                        vtype: 'email'
                     },
                     {
-                        xtype: 'textfield',
-                        name: 'passport',
-                        fieldLabel: 'Серия и номер паспорта'
+                        xtype: 'form',
+                        fieldLabel: 'Документ, удостоверяющий личность',
+                        items:
+                        [
+                                {
+                                    xtype: 'combobox',
+                                    fieldLabel: 'Паспорт',
+                                    store: 'Passports',
+                                    valueField: 'id',
+                                    displayField: 'type',
+                                    queryMode: 'remote'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    name: 'passport',
+                                    fieldLabel: 'Номер'
+                                }
+                        ]
                     },
                     {
                         xtype: 'textfield',
                         name: 'snils',
-                        fieldLabel: 'СНИЛС'
+                        fieldLabel: 'СНИЛС',
+                        emptyText: '000-000-000 00',
+                        vtype: 'snils'
                     },
                     {
                         xtype: 'textfield',
                         name: 'inn',
-                        fieldLabel: 'ИНН'
+                        fieldLabel: 'ИНН',
+                        emptyText: '000000000000',
+                        vtype: 'inn'
                     }
-                ]
+                ],
             }
         ];
 

@@ -5,8 +5,8 @@
         'user.List',
         'user.Edit'
     ],
-    stores: ['Users'],
-    models: ['User'],
+    stores: ['Users', 'Passports'],
+    models: ['User','Passport'],
 
     init: function () {
         this.control({
@@ -19,9 +19,9 @@
             'useredit button[action=save]': {
                 click: this.updateUser
             },
-            'toolbar': {
-                deleteClick: this.deleteUserSelection
-            },
+            //'toolbar': {
+            //    deleteClick: this.deleteUserSelection
+            //},
         });
     },
 

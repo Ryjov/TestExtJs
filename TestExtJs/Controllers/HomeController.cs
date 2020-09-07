@@ -20,7 +20,6 @@ namespace TestExtJs.Controllers
         {
             return View();
         }
-        
         public HomeController(IUserRepository r)
         {
             repo = r;

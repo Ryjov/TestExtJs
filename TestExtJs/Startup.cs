@@ -27,6 +27,7 @@ namespace TestExtJs
             services.AddControllersWithViews();
             string connectionString = "Server=127.0.0.1;User Id=postgres;Password=225322;Port=5432;Database=SocSecDB";
             services.AddTransient<IUserRepository, UserRepository>(provider => new UserRepository(connectionString));
+            services.AddTransient<IPassportRepository, PassportRepository>(provider => new PassportRepository(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
