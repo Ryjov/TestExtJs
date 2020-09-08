@@ -23,9 +23,13 @@ namespace TestExtJs.Models
             using (IDbConnection db = new NpgsqlConnection(connectionString))
             {
                 return db.Query<UserModel>("SELECT " +
-                    "*" +
+                    "ps.id, ps.name, ps.snils, ps.email, ps.inn, ps.passport, ps.passport_type, pss.type AS pass_name" +
                     " FROM " +
-                    "personas").ToList();
+                    "personas ps" +
+                    " JOIN " +
+                    "passports pss" +
+                    " ON " +
+                    "pss.id = ps.passport_type").ToList();
             }
         }
         public String GetUser(int id)

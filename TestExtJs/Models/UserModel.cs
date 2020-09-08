@@ -16,5 +16,6 @@ namespace TestExtJs.Models
         public string snils { get; set; }
         public string inn { get; set; }
         public int passport_type { get; set; }
+        public string pass_name { get; set; }
     }
 }

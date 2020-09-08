@@ -61,13 +61,13 @@
                                     fieldLabel: 'Паспорт',
                                     name: 'passport_type',
                                     store: 'Passports',
-                                    valueField: 'pass_id',
-                                    displayField: 'pass_name',
+                                    valueField: 'id',
+                                    displayField: 'type',
                                     queryMode: 'remote'
                                 },
                                 {
                                     xtype: 'textfield',
-                                    name: '',
+                                    name: 'passport',
                                     fieldLabel: 'Серия и номер'
                                 }
                         ]
