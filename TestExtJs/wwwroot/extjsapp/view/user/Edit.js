@@ -9,9 +9,9 @@
     initComponent: function () {
         Ext.apply(Ext.form.field.VTypes, {
             snils: function (val, field) {
-                return /^([0-9][0-9][0-9])-([0-9][0-9][0-9])-([0-9][0-9][0-9]) ([0-9][0-9])$/i.test(val);
+                return /^[0-9]{3}-[0-9]{3}-[0-9]{3} [0-9]{2}$/i.test(val);
             },
-            snilsInvalidText: 'СНИЛС введен неверно',
+            snilsInvalidText: 'СНИЛС должен состоять из трех наборов трезначных чисел, чередующихся с тире (\'-\'), после чего, через пробел записаны последние две цифры',
             snilsMask: /[\d- ]/i
         });
         Ext.apply(Ext.form.field.VTypes, {
@@ -25,8 +25,15 @@
             fio: function (val, field) {
                 return /^([А-ЯЁ][а-яё]*) ([А-ЯЁ][а-яё]*) ([А-ЯЁ][а-яё]*)$/i.test(val);
             },
-            fioInvalidText: 'ФИО введен неверно',
+            fioInvalidText: 'Должны быть введены три слова с заглавной буквы, через пробел',
             fioMask: /[А-ЯЁа-яё ]/i
+        });
+        Ext.apply(Ext.form.field.VTypes, {
+            pass: function (val, field) {
+                return /^[0-9]{4} [0-9]{6}$/i.test(val);
+            },
+            passInvalidText: 'Должны быть введены 4 символа серии и 6 символов номера',
+            passMask: /[\d ]/i
         });
         this.items = [
             {
@@ -41,14 +48,16 @@
                         name: 'name',
                         fieldLabel: 'ФИО',
                         emptyText: 'Иванов Иван Иванович',
-                        vtype: 'fio'
+                        vtype: 'fio',
+                        allowBlank: false
                     },
                     {
                         xtype: 'textfield',
                         name: 'email',
                         fieldLabel: 'Электронная почта',
                         emptyText: 'aaa@gmail.com',
-                        vtype: 'email'
+                        vtype: 'email',
+                        allowBlank: false
                     },
                     {
                         xtype: 'form',
@@ -63,12 +72,17 @@
                                     store: 'Passports',
                                     valueField: 'id',
                                     displayField: 'type',
-                                    queryMode: 'remote'
+                                    queryMode: 'remote',
+                                    readonly: true,
+                                    editable: false,
+                                    allowBlank: false
                                 },
                                 {
                                     xtype: 'textfield',
                                     name: 'passport',
-                                    fieldLabel: 'Серия и номер'
+                                    fieldLabel: 'Серия и номер',
+                                    vtype: 'pass',
+                                    allowBlank: false
                                 }
                         ]
                     },
@@ -77,14 +91,16 @@
                         name: 'snils',
                         fieldLabel: 'СНИЛС',
                         emptyText: '000-000-000 00',
-                        vtype: 'snils'
+                        vtype: 'snils',
+                        allowBlank: false
                     },
                     {
                         xtype: 'textfield',
                         name: 'inn',
                         fieldLabel: 'ИНН',
                         emptyText: '000000000000',
-                        vtype: 'inn'
+                        vtype: 'inn',
+                        allowBlank: false
                     }
                 ],
             }

@@ -48,51 +48,56 @@
             form = win.down('form'),
             values = form.getValues(),
             store = Ext.widget('userlist').getStore();
-        if (values.id == 0) {
-            Ext.Ajax.request({
-                method: 'POST',
-                url: 'Home/UsersAdd',
-                params: values,
-                success: function (response, options) {
-                    var data = Ext.decode(response.responseText);
-                    if (data) {
-                        win.close();
-                        Ext.Msg.alert('Пользователь добавлен', 'Пользователь ' + values.name + ' был создан');
-                        store.sync();
-                        store.load();
+        if (form.isValid()) {
+            if (values.id == 0) {
+                Ext.Ajax.request({
+                    method: 'POST',
+                    url: 'Home/UsersAdd',
+                    params: values,
+                    success: function (response, options) {
+                        var data = Ext.decode(response.responseText);
+                        if (data) {
+                            win.close();
+                            Ext.Msg.alert('Пользователь добавлен', 'Пользователь ' + values.name + ' был создан');
+                            store.sync();
+                            store.load();
+                        }
+                        else {
+                            Ext.Msg.alert('Неуспех', 'Пользователь ' + values.name + ' был создан, но данные не были схвачены.');
+                        }
+                    },
+                    failure: function (response, options) {
+                        Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
                     }
-                    else {
-                        Ext.Msg.alert('Неуспех', 'Пользователь ' + values.name + ' был создан, но данные не были схвачены.');
-                    }
-                },
-                failure: function (response, options) {
-                    Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
-                }
-            });
+                });
+            }
+            else {
+                record = form.getRecord(),
+                    oldname = record.get('name'),
+                    Ext.Ajax.request({
+                        method: 'PUT',
+                        url: 'Home/UsersEdit',
+                        params: values,
+                        success: function (response, options) {
+                            var data = Ext.decode(response.responseText);
+                            if (data) {
+                                win.close();
+                                Ext.Msg.alert('Пользователь изменен', 'Данные пользователя ' + values.name + ' (' + oldname + ') были изменены ');
+                                store.sync();
+                                store.load();
+                            }
+                            else {
+                                Ext.Msg.alert('Неуспех', 'Пользователь ' + values.name + ' был создан, но данные не были схвачены.');
+                            }
+                        },
+                        failure: function (response, options) {
+                            Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
+                        }
+                    });
+            }
         }
         else {
-            record = form.getRecord(),
-            oldname = record.get('name'),
-            Ext.Ajax.request({
-                method: 'PUT',
-                url: 'Home/UsersEdit',
-                params: values,
-                success: function (response, options) {
-                    var data = Ext.decode(response.responseText);
-                    if (data) {
-                        win.close();
-                        Ext.Msg.alert('Пользователь изменен', 'Данные пользователя ' + values.name + ' (' + oldname + ') были изменены ');
-                        store.sync();
-                        store.load();
-                    }
-                    else {
-                        Ext.Msg.alert('Неуспех', 'Пользователь ' + values.name + ' был создан, но данные не были схвачены.');
-                    }
-                },
-                failure: function (response, options) {
-                    Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
-                }
-            });
+            Ext.Msg.alert('Ошибка: Модель заполнена неверно', 'Форма была заполненна неверно. Проверьте правильность заполнения формы.')
         }
     },
 
