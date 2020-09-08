@@ -24,21 +24,17 @@
                     var view = Ext.widget('useredit');
                 }
             }, {
-                xtype: 'button',
-                //disabled: true,
+                    xtype: 'button',
+                action: 'delete',
                 icon: '../extjs/examples/restful/images/delete.png',
                 text: 'Удалить',
-                margin: '50 5 5 50',
-                handler: function (view) {
-                    this.fireEvent('deleteClick', view, 'edit');
-                }
+                margin: '50 5 5 50'
             }]
         }
     ],
 
     initComponent: function () {
         this.columns = [
-            //{ xtype: 'hiddenfield', dataIndex: 'id'},
             { header: 'ФИО', dataIndex: 'name', flex: 1 },
             { header: 'Электронная почта', dataIndex: 'email', flex: 1 },
             { header: 'Документ, удостоверяющий личность', dataIndex: 'pass_name', flex: 2 },

@@ -19,9 +19,9 @@
             'useredit button[action=save]': {
                 click: this.updateUser
             },
-            //'toolbar': {
-            //    deleteClick: this.deleteUserSelection
-            //},
+            'toolbar button[action=delete]': {
+                click: this.deleteUserSelection
+            }
         });
     },
 
@@ -125,16 +125,29 @@
         }, this);
     },
 
-    deleteUserSelection: function (view) {
-        Ext.Msg.alert('Delete','delete')
-        //var store = Ext.widget('userlist').getStore();
-        //var selection = this.getView().getSelectionModel().getSelection();
-        //if (selection.length > 1) {
-        //    store.removeAll(selection);
-        //}
-        //else {
-        //    store.remove(selection);
-        //}
-        //store.sync();
+    deleteUserSelection: function (toolbar, button) {
+        store = Ext.widget('userlist').getStore();
+        Ext.Msg.confirm('Подтвердите удаление', 'Вы уверены, что хотите удалить несколько пользователей', function (button) {
+            if (button === "no") { }
+            else if (button === "yes") {
+                var sel = toolbar.up('viewport').down('gridview').getSelectionModel().getSelection();
+                Ext.each(sel, function (data) {
+                    Ext.Ajax.request({
+                        method: 'DELETE',
+                        url: 'Home/UsersDelete',
+                        params: {
+                            id: data.get('id'),
+                        },
+                        success: function (response, options) {
+                            store.sync();
+                            store.load();
+                        },
+                        failure: function (response, options) {
+                            Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
+                        }
+                    });
+                });
+            }
+        }, this);
     }
 });
