@@ -21,6 +21,9 @@
             },
             'toolbar button[action=delete]': {
                 click: this.deleteUserSelection
+            },
+            'toolbar button[action=report]': {
+                click: this.makeReport
             }
         });
     },
@@ -125,7 +128,7 @@
         }, this);
     },
 
-    deleteUserSelection: function (toolbar, button) {
+    deleteUserSelection: function (toolbar) {
         store = Ext.widget('userlist').getStore();
         Ext.Msg.confirm('Подтвердите удаление', 'Вы уверены, что хотите удалить несколько пользователей', function (button) {
             if (button === "no") { }
@@ -149,5 +152,18 @@
                 });
             }
         }, this);
+    },
+
+    makeReport: function (toolbar) {
+        Ext.Ajax.request({
+            method: 'GET',
+            url: 'Report/GetImg',
+            success: function (response, options) {
+                window.open('/report/getimg', "_blank");
+            },
+            failure: function (response, options) {
+                Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
+            }
+        });
     }
 });

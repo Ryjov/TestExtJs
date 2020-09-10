@@ -9,22 +9,25 @@ using TestExtJs.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
-using FastReport.Web;
-using System.Text;
-using System.Data;
+using Microsoft.AspNetCore.Hosting;
+using FastReport;
+using FastReport.Export.Image;
+using System.IO;
 
 namespace TestExtJs.Controllers
 {
     public class HomeController : Controller
     {
+        private IWebHostEnvironment _env;
         IUserRepository repo;
         public IActionResult Index()
         {
             return View();
         }
-        public HomeController(IUserRepository r)
+        public HomeController(IUserRepository r, IWebHostEnvironment env)
         {
             repo = r;
+            _env = env;
         }
         [HttpGet]
         public JsonResult UsersList()
@@ -36,13 +39,11 @@ namespace TestExtJs.Controllers
         {
             return repo.GetUser(id);
         }
-
         [HttpPost]
         public String UsersAdd(UserModel user)
         {
             return repo.Create(user);
         }
-
         [HttpPut]
         public String UsersEdit(UserModel user)
         {

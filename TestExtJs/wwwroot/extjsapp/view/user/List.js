@@ -29,7 +29,13 @@
                 icon: '../extjs/examples/restful/images/delete.png',
                 text: 'Удалить',
                 margin: '50 5 5 50'
-            }]
+                }, {
+                    xtype: 'button',
+                    action: 'report',
+                    icon: '../extjs/examples/sandbox/images/tabs.gif',
+                    text: 'Отчет',
+                    margin: '50 5 5 50'
+                }]
         }
     ],
 

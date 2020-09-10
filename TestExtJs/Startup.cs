@@ -28,6 +28,7 @@ namespace TestExtJs
             string connectionString = "Server=127.0.0.1;User Id=postgres;Password=225322;Port=5432;Database=SocSecDB";
             services.AddTransient<IUserRepository, UserRepository>(provider => new UserRepository(connectionString));
             services.AddTransient<IPassportRepository, PassportRepository>(provider => new PassportRepository(connectionString));
+            services.AddTransient<IReportRepository, ReportRepository>(provider => new ReportRepository(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +45,8 @@ namespace TestExtJs
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseFastReport();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();

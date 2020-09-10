@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/10/2020 14:29:50" ReportInfo.Modified="09/10/2020 14:36:32" ReportInfo.CreatorVersion="2020.4.0.0">
+  <Styles Name="Blue">
+    <Style Name="Title" Font="Arial, 12pt, style=Bold"/>
+    <Style Name="Header" Fill.Color="LightSkyBlue" Font="Arial, 10pt, style=Bold"/>
+    <Style Name="Group" Font="Arial, 10pt, style=Bold"/>
+    <Style Name="Data" Font="Arial, 10pt"/>
+    <Style Name="Footer" Fill.Color="LightSkyBlue" Font="Arial, 10pt"/>
+    <Style Name="EvenRows" Fill.Color="AliceBlue" Font="Arial, 10pt"/>
+  </Styles>
+  <Dictionary>
+    <JsonDataSourceConnection Name="Connection" ConnectionString="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">
+      <JsonTableDataSource Name="JSON" DataType="FastReport.Data.JsonConnection.JsonParser.JsonArray" Enabled="true" TableName="JSON">
+        <Column Name="index" DataType="System.Int32"/>
+        <Column Name="item" DataType="FastReport.JsonBase">
+          <Column Name="id" DataType="System.Double"/>
+          <Column Name="name" DataType="System.String"/>
+          <Column Name="email" DataType="System.String"/>
+          <Column Name="passport" DataType="System.String"/>
+          <Column Name="snils" DataType="System.String"/>
+          <Column Name="inn" DataType="System.String"/>
+          <Column Name="passport_type" DataType="System.Double"/>
+          <Column Name="pass_name" DataType="System.String"/>
+        </Column>
+        <Column Name="array" DataType="FastReport.JsonBase"/>
+      </JsonTableDataSource>
+    </JsonDataSourceConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Width="718.2" Height="37.8" Dock="Fill" Text="Список зарегестрированных пользователей" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold" Style="Title"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="41.8" Width="718.2" Height="141.75" DataSource="JSON">
+      <TextObject Name="Text2" Width="207.9" Height="18.9" Fill.Color="LightSkyBlue" Text="Фамилия Имя Отчество" Font="Arial, 10pt, style=Bold" Style="Header"/>
+      <TextObject Name="Text3" Left="207.9" Width="510.3" Height="18.9" Text="[JSON.item.name]" Font="Arial, 10pt" Style="Data"/>
+      <TextObject Name="Text4" Top="18.9" Width="207.9" Height="18.9" Fill.Color="LightSkyBlue" Text="Электронная почта" Font="Arial, 10pt, style=Bold" Style="Header"/>
+      <TextObject Name="Text6" Top="37.8" Width="207.9" Height="37.8" Fill.Color="LightSkyBlue" Text="Документ, удостоверяющий личность" Font="Arial, 10pt, style=Bold" Style="Header"/>
+      <TextObject Name="Text9" Left="207.9" Top="18.9" Width="510.3" Height="18.9" Text="[JSON.item.email]" Font="Arial, 10pt" Style="Data"/>
+      <TextObject Name="Text10" Left="207.9" Top="37.8" Width="510.3" Height="37.8" Text="[JSON.item.pass_name]" Font="Arial, 10pt" Style="Data"/>
+      <TextObject Name="Text12" Left="207.9" Top="75.6" Width="510.3" Height="18.9" Text="[JSON.item.passport]" Font="Arial, 10pt" Style="Data"/>
+      <TextObject Name="Text13" Left="207.9" Top="94.5" Width="510.3" Height="18.9" Text="[JSON.item.snils]" Font="Arial, 10pt" Style="Data"/>
+      <TextObject Name="Text14" Top="75.6" Width="207.9" Height="18.9" Fill.Color="LightSkyBlue" Text="Серия и № паспорта" Font="Arial, 10pt, style=Bold" Style="Header"/>
+      <TextObject Name="Text15" Top="94.5" Width="207.9" Height="18.9" Fill.Color="LightSkyBlue" Text="СНИЛС" Font="Arial, 10pt, style=Bold" Style="Header"/>
+      <TextObject Name="Text16" Top="113.4" Width="207.9" Height="18.9" Fill.Color="LightSkyBlue" Text="ИНН" Font="Arial, 10pt, style=Bold" Style="Header"/>
+      <TextObject Name="Text17" Left="207.9" Top="113.4" Width="510.3" Height="18.9" Text="[JSON.item.inn]" Font="Arial, 10pt" Style="Data"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="187.55" Width="718.2" Height="18.9">
+      <TextObject Name="Text8" Width="718.2" Height="18.9" Dock="Fill" Fill.Color="LightSkyBlue" Text="[PageN]" HorzAlign="Right" Font="Arial, 10pt" Style="Footer"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>
