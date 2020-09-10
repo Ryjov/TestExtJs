@@ -3,7 +3,8 @@
 
     views: [
         'user.List',
-        'user.Edit'
+        'user.Edit',
+        'Report'
     ],
     stores: ['Users', 'Passports'],
     models: ['User','Passport'],
@@ -24,6 +25,9 @@
             },
             'toolbar button[action=report]': {
                 click: this.makeReport
+            },
+            'usersreport button[action=saveReport]': {
+                click: this.saveReport
             }
         });
     },
@@ -159,7 +163,20 @@
             method: 'GET',
             url: 'Report/GetReport',
             success: function (response, options) {
-                window.open('/report/getreport', "_blank");
+                var view = Ext.widget('usersreport');
+            },
+            failure: function (response, options) {
+                Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
+            }
+        });
+    },
+
+    saveReport: function () {
+        Ext.Ajax.request({
+            method: 'GET',
+            url: 'Report/SaveReport',
+            success: function (response, options) {
+                
             },
             failure: function (response, options) {
                 Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
