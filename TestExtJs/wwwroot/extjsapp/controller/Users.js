@@ -157,9 +157,9 @@
     makeReport: function (toolbar) {
         Ext.Ajax.request({
             method: 'GET',
-            url: 'Report/GetImg',
+            url: 'Report/GetReport',
             success: function (response, options) {
-                window.open('/report/getimg', "_blank");
+                window.open('/report/getreport', "_blank");
             },
             failure: function (response, options) {
                 Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
