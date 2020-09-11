@@ -134,28 +134,30 @@
 
     deleteUserSelection: function (toolbar) {
         store = Ext.widget('userlist').getStore();
-        Ext.Msg.confirm('Подтвердите удаление', 'Вы уверены, что хотите удалить несколько пользователей', function (button) {
-            if (button === "no") { }
-            else if (button === "yes") {
-                var sel = toolbar.up('viewport').down('gridview').getSelectionModel().getSelection();
-                Ext.each(sel, function (data) {
-                    Ext.Ajax.request({
-                        method: 'DELETE',
-                        url: 'Home/UsersDelete',
-                        params: {
-                            id: data.get('id'),
-                        },
-                        success: function (response, options) {
-                            store.sync();
-                            store.load();
-                        },
-                        failure: function (response, options) {
-                            Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
-                        }
+        var sel = toolbar.up('viewport').down('gridview').getSelectionModel().getSelection();
+        if (sel.length>0) {
+            Ext.Msg.confirm('Подтвердите удаление', 'Вы уверены, что хотите удалить отмеченных пользователей', function (button) {
+                if (button === "no") { }
+                else if (button === "yes") {
+                    Ext.each(sel, function (data) {
+                        Ext.Ajax.request({
+                            method: 'DELETE',
+                            url: 'Home/UsersDelete',
+                            params: {
+                                id: data.get('id'),
+                            },
+                            success: function (response, options) {
+                                store.sync();
+                                store.load();
+                            },
+                            failure: function (response, options) {
+                                Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
+                            }
+                        });
                     });
-                });
-            }
-        }, this);
+                }
+            }, this);
+        }
     },
 
     makeReport: function () {
