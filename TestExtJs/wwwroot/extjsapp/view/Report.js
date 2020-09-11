@@ -18,7 +18,7 @@
 
         this.buttons = [
             {
-                text: 'Сохранить',
+                text: 'Скачать',
                 action: 'saveReport'
             },
             {

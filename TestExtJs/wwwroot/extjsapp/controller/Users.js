@@ -158,7 +158,7 @@
         }, this);
     },
 
-    makeReport: function (toolbar) {
+    makeReport: function () {
         Ext.Ajax.request({
             method: 'GET',
             url: 'Report/GetReport',
@@ -176,7 +176,19 @@
             method: 'GET',
             url: 'Report/SaveReport',
             success: function (response, options) {
-                
+                function download(filename, text) {
+                    var element = document.createElement('a');
+                    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+                    element.setAttribute('download', filename);
+
+                    element.style.display = 'none';
+                    document.body.appendChild(element);
+
+                    element.click();
+
+                    document.body.removeChild(element);
+                };
+                download("Report.html", response.responseText);
             },
             failure: function (response, options) {
                 Ext.Msg.alert('Ошибка сервера', 'Текст: ' + response.responseText)
